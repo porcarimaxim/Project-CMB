@@ -1,1 +1,13 @@
-Hello {{ name }}!
+Hello {{ name }}!<br><br>
+
+{% for user in users %}
+	<div>
+		<strong>User:</strong> {{ user.firstName }} {{ user.lastName }}
+	</div>
+	<div>
+		<strong>Email:</strong> {{ user.email }}
+	</div>
+	<hr>
+{% else %}
+	No one user in database...
+{% endfor %}
