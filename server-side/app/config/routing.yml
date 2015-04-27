@@ -5,3 +5,12 @@ api:
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+nmpolo_rest:
+    resource: "@NmpoloRestBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+nmpolo:
+    type: rest
+    resource: "@NmpoloRestBundle/Resources/config/routing.yml"
