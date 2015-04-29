@@ -1,4 +1,4 @@
-Hello {{ name }}!<br><br>
+Hello<br><br>
 
 {% for user in users %}
 	<div>
@@ -9,5 +9,14 @@ Hello {{ name }}!<br><br>
 	</div>
 	<hr>
 {% else %}
-	No one user in database...
+	{% if users %}
+		<div>
+			<strong>User:</strong> {{ users.firstName }} {{ users.lastName }}
+		</div>
+		<div>
+			<strong>Email:</strong> {{ users.email }}
+		</div>
+	{% else %}
+		No one user in database...
+	{% endif %}
 {% endfor %}
