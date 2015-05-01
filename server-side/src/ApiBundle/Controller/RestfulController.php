@@ -54,8 +54,8 @@ class RestfulController extends FOSRestController
 		$usersModel = new Users();
 		$form = $this->createForm(new UsersType(), $usersModel);
 		$form->submit($request);
-
 		if ($form->isValid()) {
+			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($usersModel);
 			$em->flush();
@@ -65,7 +65,7 @@ class RestfulController extends FOSRestController
 				'_format' => $request->get('_format')
 			);
 
-			return $this->routeRedirectView('api_1_get_user', $routeOptions, Codes::HTTP_CREATED);
+			return $this->routeRedirectView('api_v1_get_user', $routeOptions, Codes::HTTP_CREATED);
 		}
 	}
 }

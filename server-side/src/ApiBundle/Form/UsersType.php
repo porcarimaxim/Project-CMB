@@ -36,6 +36,6 @@ class UsersType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'apibundle_users';
+		return '';
 	}
 }
