@@ -79,4 +79,87 @@ class Users
     {
         return $this->lastName;
     }
+    /**
+     * @var string
+     */
+    private $email;
+
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Users
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $updatedOn;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdOn;
+
+
+    /**
+     * Set updatedOn
+     *
+     * @param \DateTime $updatedOn
+     * @return Users
+     */
+    public function setUpdatedOn($updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedOn
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * Set createdOn
+     *
+     * @return Users
+     */
+    public function setCreatedOn()
+    {
+        $this->createdOn = new \DateTime('now');
+
+        return $this;
+    }
+
+    /**
+     * Get createdOn
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedOn()
+    {
+        return $this->createdOn;
+    }
 }

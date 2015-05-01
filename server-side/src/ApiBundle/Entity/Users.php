@@ -24,6 +24,16 @@ class Users
      */
     private $lastName;
 
+	/**
+	 * @var \DateTime
+	 */
+	private $updatedOn;
+
+	/**
+	 * @var \DateTime
+	 */
+	private $createdOn;
+
     /**
      * Get id
      *
@@ -106,5 +116,49 @@ class Users
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set updatedOn
+     *
+     * @return Users
+     */
+    public function setUpdatedOn()
+    {
+        $this->updatedOn = new \DateTime('now');
+
+        return $this;
+    }
+
+    /**
+     * Get updatedOn
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * Set createdOn
+     *
+     * @return Users
+     */
+    public function setCreatedOn()
+    {
+        $this->createdOn = new \DateTime('now');
+
+        return $this;
+    }
+
+    /**
+     * Get createdOn
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedOn()
+    {
+        return $this->createdOn;
     }
 }

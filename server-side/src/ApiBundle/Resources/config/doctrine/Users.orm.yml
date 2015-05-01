@@ -21,4 +21,13 @@ ApiBundle\Entity\Users:
             type: string
             length: 255
             column: email
-    lifecycleCallbacks: {  }
+        updatedOn:
+            type: datetime
+            nullable: true
+        createdOn:
+            type: datetime
+            nullable: true
+
+    lifecycleCallbacks:
+        prePersist: [setCreatedOn]
+        preUpdate: [setUpdatedOn]
