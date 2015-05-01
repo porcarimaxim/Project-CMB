@@ -31,7 +31,7 @@ class RestfulController extends FOSRestController
 	}
 
 	/**
-	 * Return one user by id
+	 * Return user by id
 	 *
 	 * @param $id
 	 * @return \Symfony\Component\HttpFoundation\Response
@@ -49,6 +49,12 @@ class RestfulController extends FOSRestController
 		return $this->handleView($view);
 	}
 
+	/**
+	 * Create user
+	 *
+	 * @param Request $request
+	 * @return \FOS\RestBundle\View\View
+	 */
 	public function postUserAction(Request $request)
 	{
 		$usersModel = new Users();
@@ -67,5 +73,45 @@ class RestfulController extends FOSRestController
 
 			return $this->routeRedirectView('api_v1_get_user', $routeOptions, Codes::HTTP_CREATED);
 		}
+
+		throw $this->createAccessDeniedException();
+	}
+
+	/**
+	 * Update user
+	 *
+	 * @param $id
+	 * @param Request $request
+	 * @return \FOS\RestBundle\View\View
+	 */
+	public function putUserAction($id, Request $request) {
+		$em = $this->getDoctrine()->getManager();
+		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$userRecord = $usersRepository->find($id);
+
+		$form = $this->createForm(new UsersType(), $userRecord);
+		$form->submit($request, false);
+
+		if ($form->isValid()) {
+			$em->persist($userRecord);
+			$em->flush();
+
+			$routeOptions = array(
+				'id' => $id,
+				'_format' => $request->get('_format')
+			);
+
+			return $this->routeRedirectView('api_v1_get_user', $routeOptions, Codes::HTTP_CREATED);
+		}
+
+		throw $this->createNotFoundException(sprintf('The resource \'%s\' was not found.', $id));
+	}
+
+	public function deleteUserAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$userRecord = $usersRepository->find($id);
+		$em->remove($userRecord);
+		$em->flush();
 	}
 }

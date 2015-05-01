@@ -1,12 +1,10 @@
-parameters:
-#    api.example.class: ApiBundle\Example
-
-services:
-#    api.example:
-#        class: %api.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
-#        calls:
-#            - [setService, [@service_id]]
-#        tags:
-#            - { name: twig.extension }
-#            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+ApiBundle\Entity\Users:
+    properties:
+        email:
+            - NotBlank: ~
+            - NotNull: ~
+            - Length:
+                min: 5
+                max: 100
+                minMessage: "Your title must be at least  characters length"
+                maxMessage: "Your title name cannot be longer than  characters length"

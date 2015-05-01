@@ -24,6 +24,16 @@ class Users
      */
     private $lastName;
 
+	/**
+	 * @var \DateTime
+	 */
+	private $updatedOn;
+
+	/**
+	 * @var \DateTime
+	 */
+	private $createdOn;
+
     /**
      * Get id
      *
@@ -107,26 +117,15 @@ class Users
     {
         return $this->email;
     }
-    /**
-     * @var \DateTime
-     */
-    private $updatedOn;
-
-    /**
-     * @var \DateTime
-     */
-    private $createdOn;
-
 
     /**
      * Set updatedOn
      *
-     * @param \DateTime $updatedOn
      * @return Users
      */
-    public function setUpdatedOn($updatedOn)
+    public function setUpdatedOn()
     {
-        $this->updatedOn = $updatedOn;
+        $this->updatedOn = new \DateTime('now');
 
         return $this;
     }
