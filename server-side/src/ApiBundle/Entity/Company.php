@@ -39,7 +39,7 @@ class Company
      * Set name
      *
      * @param string $name
-     * @return Companies
+     * @return Company
      */
     public function setName($name)
     {
@@ -62,7 +62,7 @@ class Company
      * Set email
      *
      * @param string $email
-     * @return Companies
+     * @return Company
      */
     public function setEmail($email)
     {

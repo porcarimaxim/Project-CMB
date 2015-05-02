@@ -7,6 +7,7 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use FOS\RestBundle\Controller\Annotations;
 
 class UsersController extends FOSRestController
 {
@@ -27,6 +28,10 @@ class UsersController extends FOSRestController
 
 	/**
 	 * Return users list
+	 *
+	 * @Annotations\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
+	 * @Annotations\QueryParam(name="limit", requirements="\d+", default="5", description="How many pages to return.")
+	 *
 	 * @param Request $request
 	 * @param ParamFetcherInterface $paramFetcher
 	 * @return array
@@ -34,7 +39,7 @@ class UsersController extends FOSRestController
 	public function getUsersAction(Request $request, ParamFetcherInterface $paramFetcher)
 	{
 		$offset = $paramFetcher->get('offset');
-		$offset = null == $offset ? 0 : $offset;
+		$offset = null === $offset ? 0 : $offset;
 		$limit = $paramFetcher->get('limit');
 
 		return $this->container->get('api.user.handler')->all($limit, $offset);

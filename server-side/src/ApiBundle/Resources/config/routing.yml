@@ -2,7 +2,7 @@
 #    path:     /hello/{name}
 #    defaults: { _controller: ApiBundle:Default:index }
 
-api_restul:
+api_users:
     type: rest
     prefix: /v1
     resource: "ApiBundle\Controller\UsersController"

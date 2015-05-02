@@ -5,4 +5,4 @@ parameters:
 services:
     api.user.handler:
         class: %api.user.handler.class%
-        arguments: [doctrine.orm.entity_manager, "%api.user.class%", form.factory]
+        arguments: ["@=service('doctrine.orm.entity_manager')", "%api.user.class%", "@=service('form.factory')"]
