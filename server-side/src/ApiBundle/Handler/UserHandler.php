@@ -2,9 +2,11 @@
 
 namespace ApiBundle\Handler;
 
+use ApiBundle\Exception\InvalidFormException;
+use ApiBundle\Form\UserType;
+use ApiBundle\Model\UserInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserHandler implements UserHandlerInterface {
 
@@ -46,26 +48,60 @@ class UserHandler implements UserHandlerInterface {
 	 */
 	public function post(array $parameters)
 	{
-		// TODO: Implement post() method.
+		$user = $this->createUser();
+		return $this->processForm($user, $parameters, 'POST');
 	}
 
 	/**
-	 * @param UserInterface $page
+	 * @param UserInterface $user
 	 * @param array $parameters
 	 * @return UserInterface
 	 */
-	public function put(UserInterface $page, array $parameters)
+	public function put(UserInterface $user, array $parameters)
 	{
 		// TODO: Implement put() method.
 	}
 
 	/**
-	 * @param UserInterface $page
+	 * @param UserInterface $user
 	 * @param array $parameters
 	 * @return UserInterface
 	 */
-	public function patch(UserInterface $page, array $parameters)
+	public function patch(UserInterface $user, array $parameters)
 	{
 		// TODO: Implement patch() method.
 	}
+
+	/**
+	 * Processes the form.
+	 *
+	 * @param UserInterface $user
+	 * @param array         $parameters
+	 * @param String        $method
+	 *
+	 * @return UserInterface
+	 *
+	 * @throws \ApiBundle\Exception\InvalidFormException
+	 */
+	private function processForm(UserInterface $user, array $parameters, $method = "PUT")
+	{
+		$form = $this->formFactory->create(new UserType(), $user, array('method' => $method));
+		$form->submit($parameters, 'PATCH' !== $method);
+		if ($form->isValid()) {
+			$user = $form->getData();
+			$this->om->persist($user);
+			$this->om->flush();
+
+			return $user;
+		}
+
+		throw new InvalidFormException('Invalid submitted data', $form);
+	}
+
+	private function createUser()
+	{
+		return new $this->entityClass();
+	}
+
+
 }

@@ -11,9 +11,8 @@ ApiBundle\Entity\User:
     fields:
         companyId:
             type: integer
-            length: 11
             column: company_id
-            nullable: true
+            #nullable: true
         firstName:
             type: string
             length: 255

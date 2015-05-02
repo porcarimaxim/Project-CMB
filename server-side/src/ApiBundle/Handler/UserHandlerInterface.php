@@ -2,7 +2,8 @@
 
 namespace ApiBundle\Handler;
 
-use Symfony\Component\Security\Core\User\UserInterface;
+
+use ApiBundle\Model\UserInterface;
 
 interface UserHandlerInterface {
 

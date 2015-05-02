@@ -8,34 +8,39 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
 {
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder
-			->add('firstName')
-			->add('lastName')
-			->add('email');
-	}
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('companyId')
+            ->add('firstName')
+            ->add('lastName')
+            ->add('email')
+//            ->add('createdOn')
+//            ->add('updatedOn')
+            ->add('company')
+        ;
+    }
+    
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'ApiBundle\Entity\User',
+            'csrf_protection' => false
+        ));
+    }
 
-	/**
-	 * @param OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => 'ApiBundle\Entity\Users',
-			'csrf_protection' => false
-		));
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return '';
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return '';
+    }
 }

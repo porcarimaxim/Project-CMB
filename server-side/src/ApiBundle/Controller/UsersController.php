@@ -2,11 +2,14 @@
 
 namespace ApiBundle\Controller;
 
+use ApiBundle\Exception\InvalidFormException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use FOS\RestBundle\Util\Codes;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations;
+use ApiBundle\Model\UserInterface;
 
 class UsersController extends FOSRestController
 {
@@ -25,20 +28,40 @@ class UsersController extends FOSRestController
 
 	/**
 	 * Return users list
-	 *
-	 * @Annotations\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
-	 * @Annotations\QueryParam(name="limit", requirements="\d+", default="5", description="How many pages to return.")
-	 *
-	 * @param ParamFetcherInterface $paramFetcher
+	 * @param Request $request
 	 * @return array
 	 */
-	public function getUsersAction(ParamFetcherInterface $paramFetcher)
+	public function getUsersAction(Request $request)
 	{
-		$offset = $paramFetcher->get('offset');
-		$offset = null === $offset ? 0 : $offset;
-		$limit = $paramFetcher->get('limit');
+		$offset = $request->get('offset', 0);
+		$limit = $request->get('limit');
 
 		return $this->container->get('api.user.handler')->all($limit, $offset);
+	}
+
+
+	/**
+	 * @param Request $request
+	 * @return \FOS\RestBundle\View\View
+	 */
+	public function postUserAction(Request $request)
+	{
+		try {
+			$newPage = $this->container->get('api.user.handler')->post(
+				$request->request->all()
+			);
+
+			$routeOptions = array(
+				'id' => $newPage->getId(),
+				'_format' => $request->get('_format')
+			);
+
+			return $this->routeRedirectView('api_v1_get_user', $routeOptions, Codes::HTTP_CREATED);
+
+		} catch (InvalidFormException $exception) {
+
+			return $exception->getForm();
+		}
 	}
 
 
@@ -46,8 +69,9 @@ class UsersController extends FOSRestController
 	protected function getOr404($id)
 	{
 		if (!($page = $this->container->get('api.user.handler')->get($id))) {
-			throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.',$id));
+			throw new NotFoundHttpException(sprintf('The resource \'%s\' was not found.', $id));
 		}
 		return $page;
 	}
+
 }

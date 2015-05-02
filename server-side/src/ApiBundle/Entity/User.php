@@ -2,13 +2,15 @@
 
 namespace ApiBundle\Entity;
 
+use ApiBundle\Entity\Company;
+use ApiBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * Users
+ * User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -49,7 +51,7 @@ class User
      * Set firstName
      *
      * @param string $firstName
-     * @return Users
+     * @return User
      */
     public function setFirstName($firstName)
     {
@@ -72,7 +74,7 @@ class User
      * Set lastName
      *
      * @param string $lastName
-     * @return Users
+     * @return User
      */
     public function setLastName($lastName)
     {
@@ -100,7 +102,7 @@ class User
      * Set email
      *
      * @param string $email
-     * @return Users
+     * @return User
      */
     public function setEmail($email)
     {
@@ -122,7 +124,7 @@ class User
     /**
      * Set updatedOn
      *
-     * @return Users
+     * @return User
      */
     public function setUpdatedOn()
     {
@@ -144,7 +146,7 @@ class User
     /**
      * Set createdOn
      *
-     * @return Users
+     * @return User
      */
     public function setCreatedOn()
     {
@@ -172,7 +174,7 @@ class User
      * Set companyId
      *
      * @param integer $companyId
-     * @return Users
+     * @return User
      */
     public function setCompanyId($companyId)
     {
@@ -191,7 +193,7 @@ class User
         return $this->companyId;
     }
     /**
-     * @var \ApiBundle\Entity\Companies
+     * @var Company
      */
     private $company;
 
@@ -199,10 +201,10 @@ class User
     /**
      * Set company
      *
-     * @param \ApiBundle\Entity\Company $company
-     * @return Users
+     * @param Company $company
+     * @return User
      */
-    public function setCompany(\ApiBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -212,7 +214,7 @@ class User
     /**
      * Get company
      *
-     * @return \ApiBundle\Entity\Companies 
+     * @return Company
      */
     public function getCompany()
     {

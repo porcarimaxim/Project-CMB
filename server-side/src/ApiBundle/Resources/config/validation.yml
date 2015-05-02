@@ -1,4 +1,4 @@
-ApiBundle\Entity\Users:
+ApiBundle\Entity\User:
     properties:
         email:
             - NotBlank: ~
