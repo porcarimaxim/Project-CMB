@@ -1,7 +1,7 @@
-ApiBundle\Entity\Users:
+ApiBundle\Entity\User:
     type: entity
-    table: null
-    repositoryClass: ApiBundle\Entity\UsersRepository
+    table: users
+    repositoryClass: ApiBundle\Entity\UserRepository
     id:
         id:
             type: integer
@@ -9,6 +9,11 @@ ApiBundle\Entity\Users:
             generator:
                 strategy: AUTO
     fields:
+        companyId:
+            type: integer
+            length: 11
+            column: company_id
+            nullable: true
         firstName:
             type: string
             length: 255
@@ -24,9 +29,16 @@ ApiBundle\Entity\Users:
         updatedOn:
             type: datetime
             nullable: true
+            column: updated_on
         createdOn:
             type: datetime
             nullable: true
+            column: created_on
+
+    manyToOne:
+        company:
+            targetEntity: Company
+            inversedBy: users
 
     lifecycleCallbacks:
         prePersist: [setCreatedOn]

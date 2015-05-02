@@ -8,7 +8,7 @@ use DateTime;
 /**
  * Users
  */
-class Users
+class User
 {
     /**
      * @var integer
@@ -199,10 +199,10 @@ class Users
     /**
      * Set company
      *
-     * @param \ApiBundle\Entity\Companies $company
+     * @param \ApiBundle\Entity\Company $company
      * @return Users
      */
-    public function setCompany(\ApiBundle\Entity\Companies $company = null)
+    public function setCompany(\ApiBundle\Entity\Company $company = null)
     {
         $this->company = $company;
 

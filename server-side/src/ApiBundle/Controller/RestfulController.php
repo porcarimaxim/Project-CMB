@@ -2,7 +2,7 @@
 
 namespace ApiBundle\Controller;
 
-use ApiBundle\Entity\Users;
+use ApiBundle\Entity\User;
 use ApiBundle\Form\UsersType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Util\Codes;
@@ -19,7 +19,7 @@ class RestfulController extends FOSRestController
 	{
 		$em = $this->getDoctrine()->getManager();
 
-		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$usersRepository = $em->getRepository('ApiBundle:User');
 		$usersRecords = $usersRepository->findAll();
 
 		$data = $usersRecords;
@@ -39,7 +39,7 @@ class RestfulController extends FOSRestController
 	public function getUserAction($id)
 	{
 		$em = $this->getDoctrine()->getManager();
-		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$usersRepository = $em->getRepository('ApiBundle:User');
 
 		$data = $usersRepository->find($id);
 		$view = $this->view($data, 200)
@@ -57,11 +57,11 @@ class RestfulController extends FOSRestController
 	 */
 	public function postUserAction(Request $request)
 	{
-		$usersModel = new Users();
+		$usersModel = new User();
 		$form = $this->createForm(new UsersType(), $usersModel);
 		$form->submit($request);
+
 		if ($form->isValid()) {
-			
 			$em = $this->getDoctrine()->getManager();
 			$em->persist($usersModel);
 			$em->flush();
@@ -86,7 +86,7 @@ class RestfulController extends FOSRestController
 	 */
 	public function putUserAction($id, Request $request) {
 		$em = $this->getDoctrine()->getManager();
-		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$usersRepository = $em->getRepository('ApiBundle:User');
 		$userRecord = $usersRepository->find($id);
 
 		$form = $this->createForm(new UsersType(), $userRecord);
@@ -109,7 +109,7 @@ class RestfulController extends FOSRestController
 
 	public function deleteUserAction($id) {
 		$em = $this->getDoctrine()->getManager();
-		$usersRepository = $em->getRepository('ApiBundle:Users');
+		$usersRepository = $em->getRepository('ApiBundle:User');
 		$userRecord = $usersRepository->find($id);
 		$em->remove($userRecord);
 		$em->flush();

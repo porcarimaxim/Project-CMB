@@ -3,11 +3,12 @@
 namespace ApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * Users
  */
-class Users
+class User
 {
     /**
      * @var integer
@@ -125,7 +126,7 @@ class Users
      */
     public function setUpdatedOn()
     {
-        $this->updatedOn = new \DateTime('now');
+        $this->updatedOn = new DateTime('now');
 
         return $this;
     }
@@ -147,7 +148,7 @@ class Users
      */
     public function setCreatedOn()
     {
-        $this->createdOn = new \DateTime('now');
+        $this->createdOn = new DateTime('now');
 
         return $this;
     }
@@ -160,5 +161,61 @@ class Users
     public function getCreatedOn()
     {
         return $this->createdOn;
+    }
+    /**
+     * @var integer
+     */
+    private $companyId;
+
+
+    /**
+     * Set companyId
+     *
+     * @param integer $companyId
+     * @return Users
+     */
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+
+        return $this;
+    }
+
+    /**
+     * Get companyId
+     *
+     * @return integer 
+     */
+    public function getCompanyId()
+    {
+        return $this->companyId;
+    }
+    /**
+     * @var \ApiBundle\Entity\Companies
+     */
+    private $company;
+
+
+    /**
+     * Set company
+     *
+     * @param \ApiBundle\Entity\Company $company
+     * @return Users
+     */
+    public function setCompany(\ApiBundle\Entity\Company $company = null)
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * Get company
+     *
+     * @return \ApiBundle\Entity\Companies 
+     */
+    public function getCompany()
+    {
+        return $this->company;
     }
 }
