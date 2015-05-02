@@ -1,4 +1,8 @@
+parameters:
+    api.user.handler.class: ApiBundle\Handler\UserHandler
+    api.user.class: ApiBundle\Entity\User
+
 services:
-#    api.example:
-#        class: ApiBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    api.user.handler:
+        class: %api.user.handler.class%
+        arguments: [doctrine.orm.entity_manager, "%api.user.class%", form.factory]

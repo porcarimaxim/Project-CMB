@@ -5,5 +5,5 @@
 api_restul:
     type: rest
     prefix: /v1
-    resource: "ApiBundle\Controller\RestfulController"
+    resource: "ApiBundle\Controller\UsersController"
     name_prefix:  api_v1_ # naming collision
