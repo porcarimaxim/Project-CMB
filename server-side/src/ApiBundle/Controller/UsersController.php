@@ -4,15 +4,12 @@ namespace ApiBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\Annotations;
 
 class UsersController extends FOSRestController
 {
-
-
 	/**
 	 * @param $id
 	 * @return mixed
@@ -32,11 +29,10 @@ class UsersController extends FOSRestController
 	 * @Annotations\QueryParam(name="offset", requirements="\d+", nullable=true, description="Offset from which to start listing pages.")
 	 * @Annotations\QueryParam(name="limit", requirements="\d+", default="5", description="How many pages to return.")
 	 *
-	 * @param Request $request
 	 * @param ParamFetcherInterface $paramFetcher
 	 * @return array
 	 */
-	public function getUsersAction(Request $request, ParamFetcherInterface $paramFetcher)
+	public function getUsersAction(ParamFetcherInterface $paramFetcher)
 	{
 		$offset = $paramFetcher->get('offset');
 		$offset = null === $offset ? 0 : $offset;
