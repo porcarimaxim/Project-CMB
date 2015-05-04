@@ -5,7 +5,7 @@ namespace ApiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Companies
+ * Company
  */
 class Company
 {
@@ -24,6 +24,18 @@ class Company
      */
     private $email;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $user;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -79,5 +91,38 @@ class Company
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \ApiBundle\Entity\User $user
+     * @return Company
+     */
+    public function addUser(\ApiBundle\Entity\User $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \ApiBundle\Entity\User $user
+     */
+    public function removeUser(\ApiBundle\Entity\User $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -2,20 +2,22 @@
 
 namespace ApiBundle\Entity;
 
-use ApiBundle\Entity\Company;
-use ApiBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
 
 /**
  * User
  */
-class User implements UserInterface
+class User
 {
     /**
      * @var integer
      */
     private $id;
+
+    /**
+     * @var integer
+     */
+    private $companyId;
 
     /**
      * @var string
@@ -27,15 +29,26 @@ class User implements UserInterface
      */
     private $lastName;
 
-	/**
-	 * @var \DateTime
-	 */
-	private $updatedOn;
+    /**
+     * @var string
+     */
+    private $email;
 
-	/**
-	 * @var \DateTime
-	 */
-	private $createdOn;
+    /**
+     * @var \DateTime
+     */
+    private $updatedOn;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdOn;
+
+    /**
+     * @var \ApiBundle\Entity\Company
+     */
+    private $company;
+
 
     /**
      * Get id
@@ -45,6 +58,29 @@ class User implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set companyId
+     *
+     * @param integer $companyId
+     * @return User
+     */
+    public function setCompanyId($companyId)
+    {
+        $this->companyId = $companyId;
+
+        return $this;
+    }
+
+    /**
+     * Get companyId
+     *
+     * @return integer 
+     */
+    public function getCompanyId()
+    {
+        return $this->companyId;
     }
 
     /**
@@ -92,11 +128,6 @@ class User implements UserInterface
     {
         return $this->lastName;
     }
-    /**
-     * @var string
-     */
-    private $email;
-
 
     /**
      * Set email
@@ -124,11 +155,12 @@ class User implements UserInterface
     /**
      * Set updatedOn
      *
+     * @param \DateTime $updatedOn
      * @return User
      */
-    public function setUpdatedOn()
+    public function setUpdatedOn($updatedOn)
     {
-        $this->updatedOn = new DateTime('now');
+        $this->updatedOn = $updatedOn;
 
         return $this;
     }
@@ -146,11 +178,12 @@ class User implements UserInterface
     /**
      * Set createdOn
      *
+     * @param \DateTime $createdOn
      * @return User
      */
-    public function setCreatedOn()
+    public function setCreatedOn($createdOn)
     {
-        $this->createdOn = new DateTime('now');
+        $this->createdOn = $createdOn;
 
         return $this;
     }
@@ -164,47 +197,14 @@ class User implements UserInterface
     {
         return $this->createdOn;
     }
-    /**
-     * @var integer
-     */
-    private $companyId;
-
-
-    /**
-     * Set companyId
-     *
-     * @param integer $companyId
-     * @return User
-     */
-    public function setCompanyId($companyId)
-    {
-        $this->companyId = $companyId;
-
-        return $this;
-    }
-
-    /**
-     * Get companyId
-     *
-     * @return integer 
-     */
-    public function getCompanyId()
-    {
-        return $this->companyId;
-    }
-    /**
-     * @var Company
-     */
-    private $company;
-
 
     /**
      * Set company
      *
-     * @param Company $company
+     * @param \ApiBundle\Entity\Company $company
      * @return User
      */
-    public function setCompany(Company $company = null)
+    public function setCompany(\ApiBundle\Entity\Company $company = null)
     {
         $this->company = $company;
 
@@ -214,7 +214,7 @@ class User implements UserInterface
     /**
      * Get company
      *
-     * @return Company
+     * @return \ApiBundle\Entity\Company 
      */
     public function getCompany()
     {
