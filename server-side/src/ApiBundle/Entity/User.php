@@ -2,12 +2,15 @@
 
 namespace ApiBundle\Entity;
 
+use ApiBundle\Entity\Company;
+use ApiBundle\Model\UserInterface;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -45,7 +48,7 @@ class User
     private $createdOn;
 
     /**
-     * @var \ApiBundle\Entity\Company
+     * @var Company
      */
     private $company;
 
@@ -152,59 +155,57 @@ class User
         return $this->email;
     }
 
-    /**
-     * Set updatedOn
-     *
-     * @param \DateTime $updatedOn
-     * @return User
-     */
-    public function setUpdatedOn($updatedOn)
-    {
-        $this->updatedOn = $updatedOn;
+	/**
+	 * Set updatedOn
+	 *
+	 * @return User
+	 */
+	public function setUpdatedOn()
+	{
+		$this->updatedOn = new DateTime('now');
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get updatedOn
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedOn()
-    {
-        return $this->updatedOn;
-    }
+	/**
+	 * Get updatedOn
+	 *
+	 * @return \DateTime
+	 */
+	public function getUpdatedOn()
+	{
+		return $this->updatedOn;
+	}
 
-    /**
-     * Set createdOn
-     *
-     * @param \DateTime $createdOn
-     * @return User
-     */
-    public function setCreatedOn($createdOn)
-    {
-        $this->createdOn = $createdOn;
+	/**
+	 * Set createdOn
+	 *
+	 * @return User
+	 */
+	public function setCreatedOn()
+	{
+		$this->createdOn = new DateTime('now');
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get createdOn
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedOn()
-    {
-        return $this->createdOn;
-    }
+	/**
+	 * Get createdOn
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreatedOn()
+	{
+		return $this->createdOn;
+	}
 
     /**
      * Set company
      *
-     * @param \ApiBundle\Entity\Company $company
+     * @param Company $company
      * @return User
      */
-    public function setCompany(\ApiBundle\Entity\Company $company = null)
+    public function setCompany(Company $company = null)
     {
         $this->company = $company;
 
@@ -214,7 +215,7 @@ class User
     /**
      * Get company
      *
-     * @return \ApiBundle\Entity\Company 
+     * @return Company
      */
     public function getCompany()
     {

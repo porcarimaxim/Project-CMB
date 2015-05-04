@@ -2,6 +2,8 @@
 
 namespace ApiBundle\Entity;
 
+use ApiBundle\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,7 +36,7 @@ class Company
      */
     public function __construct()
     {
-        $this->user = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user = new ArrayCollection();
     }
 
     /**
@@ -96,10 +98,10 @@ class Company
     /**
      * Add user
      *
-     * @param \ApiBundle\Entity\User $user
+     * @param User $user
      * @return Company
      */
-    public function addUser(\ApiBundle\Entity\User $user)
+    public function addUser(User $user)
     {
         $this->user[] = $user;
 
@@ -109,9 +111,9 @@ class Company
     /**
      * Remove user
      *
-     * @param \ApiBundle\Entity\User $user
+     * @param User $user
      */
-    public function removeUser(\ApiBundle\Entity\User $user)
+    public function removeUser(User $user)
     {
         $this->user->removeElement($user);
     }

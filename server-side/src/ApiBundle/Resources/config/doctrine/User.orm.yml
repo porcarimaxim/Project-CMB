@@ -12,7 +12,6 @@ ApiBundle\Entity\User:
         companyId:
             type: integer
             column: company_id
-            #nullable: true
         firstName:
             type: string
             length: 255
@@ -36,8 +35,11 @@ ApiBundle\Entity\User:
 
     manyToOne:
         company:
-            targetEntity: Company
-            inversedBy: users
+            targetEntity: ApiBundle\Entity\Company
+            inversedBy: User
+            joinColumn:
+                name: company_id
+                referencedColumnName: id
 
     lifecycleCallbacks:
         prePersist: [setCreatedOn]

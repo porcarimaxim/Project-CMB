@@ -89,6 +89,7 @@ class UserHandler implements UserHandlerInterface {
 		$form->submit($parameters, 'PATCH' !== $method);
 		if ($form->isValid()) {
 			$user = $form->getData();
+//			var_dump($user); exit;
 			$this->om->persist($user);
 			$this->om->flush();
 

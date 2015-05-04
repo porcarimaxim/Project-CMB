@@ -34,7 +34,7 @@ class UsersController extends FOSRestController
 	public function getUsersAction(Request $request)
 	{
 		$offset = $request->get('offset', 0);
-		$limit = $request->get('limit');
+		$limit = $request->get('limit', 5);
 
 		return $this->container->get('api.user.handler')->all($limit, $offset);
 	}

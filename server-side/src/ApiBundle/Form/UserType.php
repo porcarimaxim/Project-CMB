@@ -18,8 +18,6 @@ class UserType extends AbstractType
             ->add('firstName')
             ->add('lastName')
             ->add('email')
-            ->add('updatedOn')
-            ->add('createdOn')
             ->add('company')
         ;
     }
@@ -30,7 +28,8 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'ApiBundle\Entity\User'
+            'data_class' => 'ApiBundle\Entity\User',
+	        'csrf_protection' => false
         ));
     }
 
@@ -39,6 +38,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'apibundle_user';
+        return '';
     }
 }

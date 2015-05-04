@@ -16,3 +16,11 @@ ApiBundle\Entity\Company:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+#
+#    oneToMany:
+#        user:
+#            targetEntity: ApiBundle\Entity\User
+#            mappedBy: company
+#            joinColumn:
+#                name: id
+#                referencedColumnName: company_id
